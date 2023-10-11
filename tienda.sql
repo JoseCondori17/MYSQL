@@ -100,3 +100,210 @@ FROM producto;
 SELECT nombre
 FROM fabricante
 ORDER BY nombre;
+
+-- Lista los nombres de los fabricantes ordenados de forma descendente
+SELECT nombre
+FROM fabricante
+ORDER BY nombre DESC;
+
+-- Lista los nombres de los productos ordenados en primer lugar por el
+-- nombre de forma ascendente y en segundo lugar por el precio de forma descendente
+SELECT
+    nombre
+FROM
+    producto
+ORDER BY
+    nombre,
+    precio DESC;
+
+-- Devuelve una lista con las 5 primeras filas de la tabla fabricante
+SELECT
+    *
+FROM
+    fabricante
+LIMIT 5;
+
+-- Devuelve una lista con 2 filas a partir de la cuarta fila de la
+-- tabla fabricante. La cuarta fila también se debe incluir en la respuesta
+SELECT
+    *
+FROM
+    fabricante
+LIMIT 2 OFFSET 3;
+-- other form LIMIT start, size;
+
+-- Lista el nombre y el precio del producto más barato.
+-- (Utilice solamente las cláusulas ORDER BY y LIMIT)
+SELECT
+    nombre,
+    precio
+FROM
+    producto
+ORDER BY
+    precio
+LIMIT
+    1;
+
+-- Lista el nombre y el precio del producto más caro.
+-- (Utilice solamente las cláusulas ORDER BY y LIMIT)
+SELECT
+    nombre,
+    precio
+FROM
+    producto
+ORDER BY
+    precio DESC
+LIMIT  1;
+
+-- Lista el nombre de todos los productos del fabricante
+-- cuyo identificador de fabricante es igual a 2
+SELECT
+    nombre
+FROM
+    producto
+WHERE
+    id_fabricante = 2;
+
+-- Lista el nombre de los productos que tienen un precio menor o igual a 120€
+SELECT
+    nombre
+FROM
+    producto
+WHERE
+    precio <= 120;
+
+-- Lista el nombre de los productos que tienen un precio mayor o igual a 400€
+SELECT
+    nombre
+FROM
+    producto
+WHERE
+    precio >= 400;
+
+-- Lista el nombre de los productos que no tienen un precio mayor o igual a 400€
+SELECT
+    nombre
+FROM
+    producto
+WHERE
+    precio < 400;
+
+-- Lista todos los productos que tengan un precio entre 80€ y 300€. Sin utilizar el operador BETWEEN
+SELECT
+    nombre
+FROM
+    producto
+WHERE
+    precio > 80 AND precio < 300;
+
+SELECT
+    nombre
+FROM
+    producto
+WHERE
+    precio BETWEEN 80 AND 300;
+
+-- Lista todos los productos que tengan un precio entre 60€ y 200€. Utilizando el operador BETWEEN
+SELECT
+    nombre
+FROM
+    producto
+WHERE
+    precio > 60 AND precio < 200;
+
+-- Lista todos los productos que tengan un precio mayor que 200€ y que el identificador de fabricante sea igual a 6
+SELECT
+    nombre
+FROM
+    producto
+WHERE
+    precio > 200
+  AND
+    id_fabricante = 6;
+
+-- Lista todos los productos donde el identificador de fabricante sea 1, 3 o 5. Sin utilizar el operador IN
+SELECT
+    *
+FROM
+    producto
+WHERE
+    id_fabricante = 1
+   OR
+    id_fabricante = 3
+   OR
+    id_fabricante = 5;
+
+-- Lista todos los productos donde el identificador de fabricante sea 1, 3 o 5. Utilizando el operador IN
+SELECT
+    nombre
+FROM
+    producto
+WHERE
+     id_fabricante IN (1, 3, 5)
+
+-- Lista los nombres de los fabricantes cuyo nombre empiece por la letra S
+SELECT
+    *
+FROM
+    fabricante
+WHERE
+    nombre LIKE 'A%';
+
+-- SOLUTION A
+SELECT
+    *
+FROM
+    fabricante
+WHERE
+    nombre RLIKE '^[ABC]';
+-- OTHER FORM
+SELECT
+    *
+FROM
+    fabricante
+WHERE
+    nombre LIKE 'A%'
+   OR
+    nombre LIKE 'B%'
+   OR
+    nombre LIKE 'C%';
+
+-- OTHER FORM
+SELECT
+    *
+FROM
+    fabricante
+WHERE
+    SUBSTR(nombre, 1, 1) IN ('A', 'B', 'C');
+
+-- Lista los nombres de los fabricantes cuyo nombre termine por la vocal e
+SELECT
+    *
+FROM
+    fabricante
+WHERE
+    nombre LIKE '%e';
+
+-- Lista los nombres de los fabricantes cuyo nombre contenga el carácter w
+SELECT
+    *
+FROM
+    fabricante
+WHERE
+    nombre LIKE '%w%';
+
+-- Lista los nombres de los fabricantes cuyo nombre sea de 4 caracteres
+SELECT
+    nombre
+FROM
+    fabricante
+WHERE
+    LENGTH(nombre) = 4;
+
+-- Devuelve una lista con el nombre de todos los productos que contienen la cadena Portátil en el nombre
+SELECT
+    GROUP_CONCAT(nombre SEPARATOR ', ') AS lista
+FROM
+    producto
+WHERE
+    nombre LIKE '%Portátil%'
