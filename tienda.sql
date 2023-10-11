@@ -239,7 +239,7 @@ SELECT
 FROM
     producto
 WHERE
-     id_fabricante IN (1, 3, 5)
+     id_fabricante IN (1, 3, 5);
 
 -- Lista los nombres de los fabricantes cuyo nombre empiece por la letra S
 SELECT
